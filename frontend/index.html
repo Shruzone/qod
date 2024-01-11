@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Quote of the day</title>
+  </head>
+  <body>
+    <div id="quote-display-div">
+      <div>
+        <h1 id="qod"></h1>
+      </div>
+      <div id="gap"></div>
+      <div>
+        <h3 id="author"></h3>
+      </div>
+    </div>
+  </body>
+  <script>
+    // run in the background
+    async function getQuoteOfTheDay() {
+      let response = await fetch("http://localhost:8080");
+      let body = await response.json();
+      let quote = body[0].q;
+      let author = body[0].a;
+      document.getElementById("qod").innerText = '" ' + quote + ' "';
+      document.getElementById("author").innerText = "~" + author;
+    }
+
+    getQuoteOfTheDay();
+  </script>
+</html>
